@@ -14,28 +14,18 @@ with open("Regexp/phonebook_raw.csv", "r", encoding="utf-8") as f:
     # pprint(contacts_list)
 
     for contact in contacts_list:
+        # print(contact[0])
+        text = ', '.join(contact)
+        # fio_pattern = r'([А-ЯЁа-яё]+)(\s*)(,?)([А-ЯЁа-яё]+)(\s*)(,?)([А-ЯЁа-яё]*)(,?),?)(,?)(,?)'
+        pattern = r'^[А-ЯЁа-яё]+\s*,?\s*[А-ЯЁа-яё]+\s*,?\s*[А-ЯЁа-яё]*,'
+        pattern1 = r'^[А-ЯЁа-яё]+\s*,?\s*[А-ЯЁа-яё]+\s*,?\s*[А-ЯЁа-яё]*,.*'
+        fio_pattern = r'^1,\2,\3,'#доработай тут
+        result_del = re.split(pattern, fio_pattern, text)
+        print(result_del)
+        # result = re.findall(pattern, text)
+        # print(result)
+        # print(text)
 
-        # for word in contact:
-        #     pprint(word)
-        fio_pattern = r'^([А-ЯЁа-яё]+)(\s*)(,?)([А-ЯЁа-яё]+)(\s*)(,?)([А-ЯЁа-яё]*)(,?)(,?)(,?)'
-        result = re.split(fio_pattern, contact)
-        # re.findall(fio_pattern, contact)
-    # re.split(fio_pattern, contacts_list)
-    # for contact in contacts_list:
-    #     fio_pattern = r' ^ ([А - ЯЁа - яё] +)(\s *)(, ?)([А - ЯЁа - яё] +)(\s *)(, ?)([А - ЯЁа - яё] *)(,?)(, ?)(,?)'
-    #     re.split(fio_pattern, contact)
-        # re.findall()
-        # x = re.split(r' +', contact[0])
-        # print(x)
-        # pattern = contact[0]
-        # re.findall()
-        # if contact[0] == contact[1] or contact[0] == contact[2]:
-        #     print(contact[0])
-        # for position in contact:
-            # if position == contact[0]:
-            #     print(position)
-            # print(position)
-            # if position[0] == position[1] or position[0] == position[2]:
-            #     print(position[0])
-        # print(contact)
+
+
 
