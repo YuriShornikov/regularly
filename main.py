@@ -29,11 +29,17 @@ with open("Regexp/phonebook_raw.csv", "r", encoding="utf-8") as f:
             tel = r'+7(\1)\2-\3-\4 доб.\5'
             result = re.sub(pattern, tel, contact[5])
             contact[5] = result
-        # print(contact[5])
-        # print(result)
+
 
         correct_list.append(contact)
-    print(correct_list)
+
+        print(correct_list)
+
+        # for line in correct_list:
+        #     text = ','.join(line)
+        #
+        # print(text)
+    # pprint(correct_list)
 
     with open("phonebook.csv", "w", encoding="utf-8") as f:
         datawriter = csv.writer(f, delimiter=',')
