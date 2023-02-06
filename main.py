@@ -13,18 +13,32 @@ with open("Regexp/phonebook_raw.csv", "r", encoding="utf-8") as f:
     contacts_list = list(rows)
     # pprint(contacts_list)
 
+    correct_list = []
     for contact in contacts_list:
-        # print(contact[0])
-        text = ', '.join(contact)
-        # fio_pattern = r'([А-ЯЁа-яё]+)(\s*)(,?)([А-ЯЁа-яё]+)(\s*)(,?)([А-ЯЁа-яё]*)(,?),?)(,?)(,?)'
-        pattern = r'^[А-ЯЁа-яё]+\s*,?\s*[А-ЯЁа-яё]+\s*,?\s*[А-ЯЁа-яё]*,'
-        pattern1 = r'^[А-ЯЁа-яё]+\s*,?\s*[А-ЯЁа-яё]+\s*,?\s*[А-ЯЁа-яё]*,.*'
-        fio_pattern = r'^1,\2,\3,'#доработай тут
-        result_del = re.split(pattern, fio_pattern, text)
-        print(result_del)
-        # result = re.findall(pattern, text)
+        fio = ' '.join(contact[:3]).split(' ')
+        contact[0:3] = fio[0:3]
+
+        if len(contact[5]) < 25:
+            pattern = r'^\+?[7-8]?\s?\(?(\d{3})\)?[-\s]?(\d{3})\-?(\d{2})\-?(\d{2})'
+            tel = r'+7(\1)\2-\3-\4'
+            result = re.sub(pattern, tel, contact[5])
+            contact[5] = result
+
+        else:
+            pattern = r'^\+?[7-8]?\s?\(?(\d+)\)?[-\s]?(\d+)\-?(\d+)\-(\d+)?\s?\(?[а-я]+\.?\s?(\d+)\)?'
+            tel = r'+7(\1)\2-\3-\4 доб.\5'
+            result = re.sub(pattern, tel, contact[5])
+            contact[5] = result
+        # print(contact[5])
         # print(result)
-        # print(text)
+
+        correct_list.append(contact)
+    print(correct_list)
+
+    with open("phonebook.csv", "w", encoding="utf-8") as f:
+        datawriter = csv.writer(f, delimiter=',')
+        datawriter.writerows(correct_list)
+
 
 
 
